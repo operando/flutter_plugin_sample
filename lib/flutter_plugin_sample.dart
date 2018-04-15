@@ -10,4 +10,9 @@ class FlutterPluginSample {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+  static Future<String> get model async {
+    final String model = await _channel.invokeMethod('getModel');
+    return model;
+  }
 }

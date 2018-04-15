@@ -11,6 +11,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  String _model = 'Unknown';
 
   @override
   initState() {
@@ -21,11 +22,17 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   initPlatformState() async {
     String platformVersion;
+    String model;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await FlutterPluginSample.platformVersion;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
+    }
+    try {
+      model = await FlutterPluginSample.model;
+    } on PlatformException {
+      model = 'Failed to get model.';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -36,6 +43,7 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _platformVersion = platformVersion;
+      _model = model;
     });
   }
 
@@ -47,7 +55,7 @@ class _MyAppState extends State<MyApp> {
           title: new Text('Plugin example app'),
         ),
         body: new Center(
-          child: new Text('Running on: $_platformVersion\n'),
+          child: new Text('Running on: $_model\n'),
         ),
       ),
     );
